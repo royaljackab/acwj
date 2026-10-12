@@ -1,7 +1,8 @@
 #pragma once
 
 // Tokens
-enum { 
+enum {
+    T_EOF,
     T_PLUS,
     T_MINUS,
     T_STAR,

@@ -68,13 +68,12 @@ static int scanint(int c) {
  */
 int scan(struct token *t) {
     int c;
-
     // Skip les espaces
     c = skip();
-
     // Match le token
     switch (c) {
         case EOF:
+            t->token = T_EOF;
             return 0;
         case '+':
             t->token = T_PLUS;

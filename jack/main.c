@@ -16,27 +16,12 @@ static void init() {
 
 // Affiche un usage en cas d'erreur
 static void usage(char* prog) {
-    fprintf(stderr, "Usage: %s inline\n", prog);
+    fprintf(stderr, "Usage: %s <inline>\n", prog);
     exit(1);
 } 
 
 // List of printable tokens
 char *tokstr[] = {"+", "-", "*", "/", "intlit"};
-
-// Scanne tous les tokens du fichier et les print
-static void scanfile() {
-    struct token T;
-
-    while (scan(&T)) {
-        printf("Token %s", tokstr[T.token]);
-        if (T.token == T_INTLIT) {
-            printf(", value %d", T.intvalue);
-        }
-        printf("\n");
-    }
-}
-
-
 
 int main(int argc, char* argv[]) {
     struct ASTnode *n;
@@ -45,8 +30,6 @@ int main(int argc, char* argv[]) {
         usage(argv[0]);
     }
 
-    init();
-
     if ((Infile = fopen(argv[1], "r")) == NULL) {
         fprintf(stderr, "Impossible d'ouvrir %s: %s\n", argv[1], strerror(errno));
         exit(1);
@@ -54,5 +37,6 @@ int main(int argc, char* argv[]) {
 
     scan(&Token);
     n = binexpr();
+    printf("Résultat final : %d\n", interpretAST(n));
     exit(0);
 }

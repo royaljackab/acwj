@@ -14,8 +14,6 @@ int arithop(int tok) {
             return A_MULTIPLY;
         case T_SLASH:
             return A_DIVIDE;
-        case T_INTLIT:
-            return A_INTLIT;
         default:
             fprintf(stderr, "Caractère inconnu dans arithop() ligne %d\n", Line);
             exit(1);
@@ -47,10 +45,10 @@ struct ASTnode *binexpr() {
     int nodetype;
 
     // Récupère le premier littéral et scanne le suivant
-    n = primary();
+    left = primary();
 
     // Si plus de tokens, on renvoie le gauche
-    if (Token.token == EOF) {
+    if (Token.token == T_EOF) {
         return left;
     }
 
