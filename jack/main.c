@@ -34,6 +34,10 @@ int main(int argc, char* argv[]) {
         fprintf(stderr, "Impossible d'ouvrir %s: %s\n", argv[1], strerror(errno));
         exit(1);
     }
+    if ((Outfile = fopen("out.s", "w")) == NULL) {
+        fprintf(stderr, "Impossible de créer out.s: %s\n", strerror(errno));
+        exit(1);
+    }
 
     scan(&Token);
     n = binexpr(0);
