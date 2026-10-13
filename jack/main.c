@@ -36,7 +36,7 @@ int main(int argc, char* argv[]) {
     }
 
     scan(&Token);
-    n = binexpr();
+    n = binexpr(0);
     printf("Résultat final : %d\n", interpretAST(n));
     exit(0);
 }
